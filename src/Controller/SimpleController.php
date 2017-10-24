@@ -10,18 +10,13 @@ class SimpleController extends AppController
     {
     }
 
-    public function simpleAction() 
+    public function ajaxAction() 
     {
-        if ($this->request->is(array('ajax'))) 
+        if ($this->request->is(['ajax', 'post'])) 
         {
             $now = new Time();
-
-            // the order of these three lines is very important !!!
-            $resultJ = json_encode(array('result' => array('now' => $now)));
-            $this->response->type('json');
-            $this->response->body($resultJ);
-
-            return $this->response;
+            $data = ['data' => ['now' => $now]];
+            return $this->json($data);
         }        
     }
 }

@@ -14,10 +14,9 @@ $(function()
             },
             success: function(response) 
             {
-                if (response.result) 
+                if (response.data) 
                 {
-                    var result = response.result;
-                    $('#result').html(result.now);
+                    $('#result').html(response.data.now);
                 }
             },
             error: function(e) 
@@ -32,7 +31,7 @@ $(function()
 
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li><?= $this->Html->link('Home', ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link('Home', ['controller' => 'pages']) ?></li>
     </ul>
 </nav>
 <div class="index large-9 medium-8 columns content">
@@ -45,13 +44,13 @@ $(function()
     </p>
 
     <?php 
-    $request = $this->Url->build(['action' => 'simpleAction', 'ext' => 'json']);
+    $request = $this->Url->build(['action' => 'ajaxAction', 'ext' => 'json']);
     ?>
     <button id="button" rel="<?= $request ?>">Actualizar</button>
 
     <h3>Resultado</h3>
-    <div id="result">
-        <i>n/a</i>
+    <div>
+        <i id="result">n/a</i>
     </div>
 
 </div>
